@@ -11,8 +11,8 @@ define(function (require, exports, module) {
   var documentManager = brackets.getModule("document/DocumentManager");
   var editorManager = brackets.getModule("editor/EditorManager");
   var PreferencesManager = brackets.getModule("preferences/PreferencesManager"),
-      prefs = PreferencesManager.getExtensionPrefs("ForbesLindesay/brackets-globals"),
-      stateManager = PreferencesManager.stateManager.getPrefixedSystem("ForbesLindesay/brackets-globals");
+      prefs = PreferencesManager.getExtensionPrefs("peey/brackets-globals"),
+      stateManager = PreferencesManager.stateManager.getPrefixedSystem("peey/brackets-globals");
 
   var refreshing = false;
   $(documentManager).on('currentDocumentChange', function (e, newDocument, oldDocument) {
@@ -196,7 +196,7 @@ define(function (require, exports, module) {
     }
   };
 
-  prefs.definePreference('css', 'string', 'color: red !important; text-decoration: underline !important;').on('change', function () {
-    insertCss('.cm-global-variable {'+ prefs.get('css') +'}', 'forbes-brackets-globals-style');
+  prefs.definePreference('css', 'string', 'font-style: oblique !important;').on('change', function () {
+    insertCss('.cm-global-variable {'+ prefs.get('css') +'}', 'peey-brackets-globals-style');
   });
 });
