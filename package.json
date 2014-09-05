@@ -7,6 +7,6 @@
     "author": "Peeyush Kushwaha",
     "license": "MIT",
     "engines": {
-        "brackets": ">=0.24.0"
+        "brackets": ">=0.37.0"
     }
 }
