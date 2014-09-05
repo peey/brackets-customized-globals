@@ -10,6 +10,9 @@ define(function (require, exports, module) {
   var Document = brackets.getModule("document/Document");
   var documentManager = brackets.getModule("document/DocumentManager");
   var editorManager = brackets.getModule("editor/EditorManager");
+  var PreferencesManager = brackets.getModule("preferences/PreferencesManager"),
+      prefs = PreferencesManager.getExtensionPrefs("ForbesLindesay/brackets-globals"),
+      stateManager = PreferencesManager.stateManager.getPrefixedSystem("ForbesLindesay/brackets-globals");
 
   var refreshing = false;
   $(documentManager).on('currentDocumentChange', function (e, newDocument, oldDocument) {
@@ -170,10 +173,15 @@ define(function (require, exports, module) {
     }
   }
 
-  function insertCss(css) {
-    var elem = document.createElement('style');
-    elem.setAttribute('type', 'text/css');
-
+  function insertCss(css, id) { //upserts css when id is provided
+    if(id && document.getElementById(id)) {
+      var elem = document.getElementById(id);
+    } else {
+      var elem = document.createElement('style');
+      elem.setAttribute('type', 'text/css');
+      elem.id = id || "";
+    }
+    
     if ('textContent' in elem) {
       elem.textContent = css;
     } else {
@@ -184,7 +192,7 @@ define(function (require, exports, module) {
     head.appendChild(elem);
   };
 
-  insertCss('.cm-global-variable { color: red !important; text-decoration: underline !important; }');
-
-
+  prefs.definePreference('css', 'string', 'font-style: oblique;').on('change', function () {
+    insertCss('.cm-global-variable {'+ prefs.get('css') +'}', 'forbes-brackets-globals-style');
+  });
 });
