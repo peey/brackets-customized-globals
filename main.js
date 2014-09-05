@@ -176,10 +176,12 @@ define(function (require, exports, module) {
   function insertCss(css, id) { //upserts css when id is provided
     if(id && document.getElementById(id)) {
       var elem = document.getElementById(id);
+      var update = true;
     } else {
       var elem = document.createElement('style');
       elem.setAttribute('type', 'text/css');
       elem.id = id || "";
+      var update = false;
     }
     
     if ('textContent' in elem) {
@@ -188,8 +190,10 @@ define(function (require, exports, module) {
       elem.styleSheet.cssText = css;
     }
 
-    var head = document.getElementsByTagName('head')[0];
-    head.appendChild(elem);
+    if(update === false) {//insert
+      var head = document.getElementsByTagName('head')[0];
+      head.appendChild(elem);
+    }
   };
 
   prefs.definePreference('css', 'string', 'color: red !important; text-decoration: underline !important;').on('change', function () {
