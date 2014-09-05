@@ -35,14 +35,6 @@ define(function (require, exports, module) {
   function isScope(node) {
     return node.type === 'BlockStatement' || node.type === 'FunctionExpression' || node.type === 'FunctionDeclaration' || node.type === 'Program'
   }
-  function isIncorrectLength(name) {
-    return name[0] === 'l' && name !== 'length' &&
-      (name.split('').sort().join('') === 'eghlnt' ||
-       ['lngth', 'legth','lenth', 'lengh', 'lengt'].indexOf(name) !== -1);
-  }
-  function isIncorrectInnerHTML(name) {
-    return name.toLowerCase() === 'innerhtml' && name !== 'innerHTML';
-  }
   function isValidArgumentsUse(node, parents) {
     var parent = parents[parents.length - 2];
     if (parent.type === 'MemberExpression') {
@@ -141,12 +133,6 @@ define(function (require, exports, module) {
           newMarkerLocations.push(node.loc);
         },
         'MemberExpression': function (node) {
-          var name = node.property.name;
-          if (name && (isIncorrectInnerHTML(name) || isIncorrectLength(name))) {
-            var loc = node.property.loc;
-            newMarkers.push(name);
-            newMarkerLocations.push(loc);
-          }
         }
       });
       if (oldMarkers.length !== newMarkers.length || newMarkers.some(function (name, i) { return name !== oldMarkers[i]; })) {
