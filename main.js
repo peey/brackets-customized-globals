@@ -192,7 +192,7 @@ define(function (require, exports, module) {
     head.appendChild(elem);
   };
 
-  prefs.definePreference('css', 'string', 'font-style: oblique;').on('change', function () {
+  prefs.definePreference('css', 'string', 'color: red !important; text-decoration: underline !important;').on('change', function () {
     insertCss('.cm-global-variable {'+ prefs.get('css') +'}', 'forbes-brackets-globals-style');
   });
 });
