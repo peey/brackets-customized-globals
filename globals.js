@@ -360,9 +360,13 @@ define(function (require, exports, module) {
     'jQuery'
   ];
 
+  var userGlobalGlobals = [//add the globals that you don't want to be stylized here
+  ];
+  
   var globals = {};
-  ecmaIdentifiers.concat(browserGlobals).concat(developmentGlobals).concat(workerGlobals).concat(nodeGlobals).concat(jquery).forEach(function (name) {
+  ecmaIdentifiers.concat(browserGlobals).concat(developmentGlobals).concat(workerGlobals).concat(nodeGlobals).concat(jquery).concat(userGlobalGlobals).forEach(function (name) {
     globals[name] = true;
   });
+  
   module.exports = globals;
 });
