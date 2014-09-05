@@ -1,6 +1,6 @@
 {
     "name": "customized-globals",
-    "title": "JavaScript Globals",
+    "title": "JavaScript Globals Customizer",
     "description": "Customize and stylize global variables in JavaScript code.",
     "homepage": "https://github.com/peey/brackets-globals",
     "version": "1.0.0",
